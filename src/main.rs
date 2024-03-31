@@ -71,14 +71,22 @@ fn tokenize(input: &mut Chars) -> Vec<Token> {
                 continue;
             }
         }
-        if current_term.len() > 0 {
-            res.push(Token::Term(char_position, current_term));
-            current_term = String::new();
+        if !current_term.is_empty() {
+            res.push(Token::Term(
+                char_position - current_term.len(),
+                current_term.clone(),
+            ));
+            current_term.clear();
         }
-        match next_token {
-            Some(token) => res.push(token),
-            None => ()
+        if let Some(token) = next_token {
+            res.push(token);
         }
+    }
+    if !current_term.is_empty() {
+        res.push(Token::Term(
+          char_position - current_term.len(),
+          current_term,
+        ));
     }
     res
 }
