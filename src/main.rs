@@ -82,12 +82,6 @@ fn tokenize(input: &mut Chars) -> Vec<Token> {
             res.push(token);
         }
     }
-    if !current_term.is_empty() {
-        res.push(Token::Term(
-          char_position - current_term.len(),
-          current_term,
-        ));
-    }
     res
 }
 
