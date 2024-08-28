@@ -45,7 +45,7 @@ impl Display for Statement {
 }
 
 #[derive(Debug)]
-enum Token {
+pub enum Token {
     LParen(usize),
     RParen(usize),
     Lambda(usize),
@@ -86,7 +86,7 @@ fn tokenize(input: &mut Chars) -> Vec<Token> {
 }
 
 #[derive(Debug)]
-enum TreeifyError {
+pub enum TreeifyError {
     UnclosedParen(usize),
     UnopenedParen(usize),
     MissingLambdaVar(usize),
