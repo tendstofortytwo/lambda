@@ -288,8 +288,8 @@ fn reduce_lazy(e: Expr, ctx: &HashMap<String, Expr>) -> Expr {
             else {
                 Expr::Var(v)
             }
-        }
-        _ => e
+        },
+        Expr::Abs(v, b) => Expr::Abs(v, Box::new(reduce_lazy(*b, ctx)))
     }
 }
 
